@@ -1,295 +1,95 @@
 #include <stdio.h>
+//Desafio Mestre -> Bispo mover 5 casas para diagonal Direita, Torre 5 casas para direita, Rainha 7 casas para esquerda , cavalo L para cima direita!!
+//Nesse desafio mestre mudei muita coisa para deixar o codigo mais simples mesmo, no inicio dos desafio acabei me empolgando demais kkkkkk.
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+//função que faz a movimentação da torre
+void moverTorre(int casas){
+    if (casas>0){
+        printf("Direita\n");
+        printf(" \n");
+        moverTorre(casas-1);
+    }
+}
+
+//função que faz a movimentação da rainha
+void moverRainha(int casas){
+    if (casas>0){
+        printf("Esquerda\n");
+        printf(" \n");
+        moverRainha(casas-1);
+    }
+       
+}
+
+//função que faz a movimentação do Bispo
+void moverBispo(int casas) {
+    if (casas == 0) {
+        return;
+    }
+    // Loop externo — vertical (Cima ou Baixo)
+    for (int i = 0; i < 1; i++) {
+        printf("Cima\n");
+        // Loop interno — horizontal (Direita ou Esquerda)
+        for (int j = 0; j < 1; j++) {
+            printf("Direita\n");
+            printf(" \n");
+        }
+    }
+    moverBispo(casas - 1);
+}
+
+//função que faz a movimentação do cavalo
+void moverCavalo(int movimentoCavalo){
+    while (movimentoCavalo != 0) {
+        for (int i = 0, j = 0; i < 2 || j < 1; ) {
+            if (i < 2) {
+                printf("Cima\n");
+                i++;
+                continue;
+            }
+            if (j < 1) {
+                printf("Direita\n");
+                j++;
+            }
+        }
+        movimentoCavalo--;
+    }
+}
 
 int main() {
-    int torre=0, rainha=0, bispo, cavalo;
-    int andarCasas,aux1,aux2;
+    int bispo=5, rainha= 5,torre=5;
+    int movimentoCavalo=1;
+    int aux;
     do{
-        printf("\n*********************************");
-        printf("\nEscolha qual peca vai mexer\n");
-        printf("1-Rainha\n");
-        printf("2-Torre\n");
+        printf("*********************************");
+        printf("\nEscolha qual peca voce quer mexer?\n");
+        printf("1-Torre\n");
+        printf("2-Rainha\n");
         printf("3-Bispo\n");
         printf("4-Cavalo\n");
         printf("0-Sair\n");
         printf("*********************************\n");
         printf("Digite sua Escolha: ");
-        scanf("%d",&aux1);
-        //Switch para o menu de escolha
-        int movimentoCavalo=1;
-        switch (aux1){
-            case 1://Movimentos da Rainha
-                printf("\nQuer movimentar a Rainha para qual direcao?\n");
-                printf("1- Cima\n");
-                printf("2- Baixo\n");
-                printf("3- Direita\n");
-                printf("4- Esquerda\n");
-                printf("5- Diagonal Direta\n");
-                printf("6- Diagonal Esquerda\n");
-                printf("Digite sua Escolha: ");
-                scanf("%d",&aux2);
-                switch (aux2){
-                    case 1:
-                        printf("Digite quantas casas andar para Cima: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        //IF para evitar movimentação impossivel no xadrez
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Cima\n");
-                            rainha++;
-                        }
-                        break;
-                    case 2:
-                        printf("Digite quantas casas andar para Baixo: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Cima\n");
-                            rainha++;
-                        }
-                        break;
-                    case 3:
-                        printf("Digite quantas casas andar para Direita: ");
-                        scanf("%d",&andarCasas); 
-                        printf("\n*********************************");  
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Direita\n");
-                            rainha++;
-                        }
-                        break;
-                    case 4:
-                        printf("Digite quantas casas andar para Esquerda: ");
-                        scanf("%d",&andarCasas); 
-                        printf("\n*********************************");  
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Esquerda\n");
-                            rainha++;
-                        }
-                        break;
-                    case 5:
-                        printf("Digite quantas casas andar para Diagonal Direita: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Cima Direita\n");
-                            rainha++;
-                        }
-                        break;
-                    case 6:
-                        printf("Digite quantas casas andar para Diagonal Esquerda: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        while (rainha <andarCasas){
-                            printf("Cima Esquerda\n");
-                            rainha++;
-                        }
-                        break;
-                    default:
-                        printf("Opcao Invalida\n");
-                        break;
-                }
-                rainha=0;
-                break;
+        scanf("%d",&aux);
+        printf("*********************************\n");
 
-            case 2://Movimentos da Torre
-                printf("\nQuer movimentar a Torre para qual direcao?\n");
-                printf("1- Esquerda\n");
-                printf("2- Direita\n");
-                printf("3- Cima\n");
-                printf("4- Baixo\n");
-                printf("Digite sua Escolha: ");
-                scanf("%d",&aux2);
-                switch (aux2){
-                    case 1:
-                        printf("Digite quantas casas andar para Esquerda: ");
-                        scanf("%d",&andarCasas); 
-                        printf("\n*********************************");  
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!");
-                            break;
-                        }
-                        do{
-                            printf("Esquerda\n");
-                            torre++;
-                        }while(torre<andarCasas);
-                        break;
-                    case 2:
-                        printf("Digite quantas casas andar para direita: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        do{
-                            printf("Direita\n");
-                            torre++;
-                        }while(torre<andarCasas);
-                        break;
-                    case 3:
-                        printf("Digite quantas casas andar para Cima: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");   
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        do{
-                            printf("Cima\n");
-                            torre++;
-                        }while(torre<andarCasas);
-                        break;
-                    case 4:
-                        printf("Digite quantas casas andar para Baixo: ");
-                        scanf("%d",&andarCasas); 
-                        printf("\n*********************************");  
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!!");
-                            break;
-                        }
-                        do{
-                            printf("Baixo\n");
-                            torre++;
-                        }while(torre<andarCasas);
-                        break;
-                    default:
-                        printf("Opcao Invalida\n");
-                        break;
-                }
-                torre=0;
+        //Switch para o menu de escolha
+        switch (aux){
+            case 1://Movimentos da Torre
+                moverTorre(torre);
+                break;
+            case 2://Movimentos da Rainha 
+                moverRainha(rainha);
                 break;
             case 3://Movimentos da Bispo
-                printf("\nQuer movimentar a Rainha para qual direcao?\n");
-                printf("1- Diagonal Direta\n");
-                printf("2- Diagonal Esquerda\n");
-                printf("Digite sua Escolha: ");
-                scanf("%d",&aux2);
-                switch (aux2){
-                    case 1:
-                        printf("Digite quantas casas andar para Diagonal Direta: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!");
-                            break;
-                        }
-                        for (bispo = 0; bispo < andarCasas; bispo++){
-                         printf("Cima Direta\n");
-                        }
-                        break;
-                    case 2:
-                        printf("Digite quantas casas andar para Diagonal Esquerda: ");
-                        scanf("%d",&andarCasas);
-                        printf("\n*********************************");
-                        printf("\n");
-                        if(andarCasas<0 ||andarCasas>7){
-                            printf("Movimento impossivel no tabuleiro de Xadrez!!");
-                            break;
-                        }
-                        for (bispo = 0; bispo < andarCasas; bispo++){
-                         printf("Cima Esquerda\n");
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                moverBispo(bispo);
                 break;
-             // Nível Aventureiro - Movimentação do Cavalo
             case 4://Movimentos do cavalo
-                printf("\nQuer movimentar a Rainha para qual direcao?\n");
-                printf("1- L para Baixo Direta\n");
-                printf("2- L para Baixo Esquerda\n");
-                printf("3- L para Cima Direta\n");
-                printf("4- L para Cima Esquerda\n");
-                printf("Digite sua Escolha: ");
-                scanf("%d",&aux2);
-                switch (aux2){
-                    case 1:
-                        while(movimentoCavalo!=0){
-                            for(cavalo=0;cavalo<2;cavalo++){
-                                printf("Baixo\n");
-                            }
-                            printf("Direta\n");
-                            movimentoCavalo--;
-                        }
-                        break;
-                    case 2:
-                        while(movimentoCavalo!=0){
-                            for(cavalo=0;cavalo<2;cavalo++){
-                                printf("Baixo\n");
-                            }
-                            printf("Esqueda\n");
-                            movimentoCavalo--;
-                        }
-                        break;
-                    case 3:
-                        while(movimentoCavalo!=0){
-                            for(cavalo=0;cavalo<2;cavalo++){
-                                printf("Cima\n");
-                            }
-                            printf("Direta\n");
-                            movimentoCavalo--;
-                        }
-                        break;
-                    case 4:
-                        while(movimentoCavalo!=0){
-                            for(cavalo=0;cavalo<2;cavalo++){
-                                printf("Cima\n");
-                            }
-                            printf("Esqueda\n");
-                            movimentoCavalo--;
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                printf("Movimento do cavalo L para Cima Direta\n");
+                moverCavalo(movimentoCavalo);
+                break;
             default:
                 break;
         }
-    }while(aux1!=0);
+    }while(aux!=0);
 }
-    
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
